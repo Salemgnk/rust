@@ -1,10 +1,12 @@
 fn no_arg_cat() {
     let mut input: String = String::new();
-    std::io::stdin().read_line(&mut input).unwrap();
     loop {
+        let bytes_read = std::io::stdin().read_line(&mut input).unwrap();
+        if bytes_read == 0 {
+            break;
+        }
         print!("{}", input);
         input.clear();
-        std::io::stdin().read_line(&mut input).unwrap();
     }
 }
 
