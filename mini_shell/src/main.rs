@@ -1,4 +1,4 @@
-use std::{io::Write, process::exit};
+use std::{io::Write, process::{exit, Command}};
 
 fn main_loop() {
     let mut input: String = String::new();
@@ -21,6 +21,19 @@ fn main_loop() {
                 continue;
             }
         };
+        let args: Vec<&str> = parts.collect();
+        let output = Command::new(cmd)
+            .args(&args)
+            .output();
+        match output {
+            Ok (output) => {
+                print!("{}", String::from_utf8_lossy(&output.stdout));
+                eprint!("{}", String::from_utf8_lossy(&output.stderr));
+            }
+            Err(e) => {
+                eprintln!("{}", e);
+            } 
+        }
         input.clear();
     }
 }
