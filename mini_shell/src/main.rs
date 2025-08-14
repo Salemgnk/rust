@@ -1,10 +1,18 @@
+//
+// EPITECH PROJECT, 2025
+// mini_shell
+// File description:
+// main
+//
+
 use std::{io::Write, process::{exit, Command}};
 
 fn main_loop() {
     let mut input: String = String::new();
 
     loop {
-        print!("$> ");
+        print!("{}@{} $> ", users::get_current_username().unwrap().to_string_lossy(),
+            gethostname::gethostname().to_string_lossy());
         std::io::stdout().flush().unwrap();
         let bytes_read = std::io::stdin().read_line(&mut input).unwrap();
         if bytes_read == 0 {
