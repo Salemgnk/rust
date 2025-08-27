@@ -17,5 +17,6 @@ fn main()
     std::io::stdout().flush().unwrap();
     let mut input = String::new();
     std::io::stdin().read_line(&mut input).unwrap();
+    input = input.chars().rev().collect();
     weather_report(input.trim());
 }
